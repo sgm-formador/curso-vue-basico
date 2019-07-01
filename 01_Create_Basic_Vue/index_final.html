@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>
+      {{ title }}
+    </h1>
+    <div>{{ content }}</div>
+    <div v-html="content"></div>
+    <textarea placeholder="contentTextArea"></textarea>
+    <textarea v-bind:placeholder="contentTextArea"></textarea>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      title: 'Hello Upgrade Hub!',
+      content: "Bienvenidos al <em>Workshop</em> de <strong>Vue.js</strong>",
+      contentTextArea: 'Introduzca su texto'
+    }
+  })
+  </script>
+</body>
+</html>
