@@ -4,13 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Lifecycle Hooks</title>
 </head>
 <body>
   <div id="app">
       <button v-on:click="changeText">Cambia el texto</button>
       <button v-on:click="destroy">elimina/crea</button>
     <titulo v-if='show' :text='text'/>
+  </div>
+  <hr>
+  <div id="app2">
+
+    <button v-on:click="destroy">elimina/crea</button>
+    <!-- <keep-alive> -->
+      <contador v-if='show'/>
+    <!-- </keep-alive> -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
@@ -41,6 +49,43 @@
       changeText: function(){
         this.text = 'Hola life cycle update Hooks'
       },
+      destroy: function(){
+        this.show = !this.show
+      }
+    }    
+  })
+
+  Vue.component('contador', {
+    data: function () {
+      return { count: 1 }
+    },
+    // template: '<div><h1>{{ count }}</h1> <button v-on:click="increment">+</button></div>',
+    template: '<div><h1>{{ count }}</h1></keep-alive> <button v-on:click="increment">+</button></div>',
+    beforeCreate: () => console.log('beforeCreate'),
+    created: () => console.log('created'),
+    beforeMount: () => console.log('beforeMount'),
+    mounted: () => console.log('mounted'),
+    beforeUpdate: () => console.log('beforeUpdate'),
+    updated: () => console.log('updated'),
+    activated: () => console.log('activated'),
+    deactivated: () => console.log('deactivated'),
+    beforeDestroy: () => console.log('beforeDestroy'),
+    destroyed: () => console.log('destroyed'),
+    methods: {
+      increment: function(){
+        this.count+=1
+      }
+    }    
+  })
+
+
+
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      show: true
+    },
+    methods: {
       destroy: function(){
         this.show = !this.show
       }

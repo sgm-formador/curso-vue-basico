@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Comunicacion entre componentes</title>
+</head>
+<body>
+  <div id="app">
+      <button v-on:click="changeText">Cambia el texto</button>
+      <button v-on:click="destroy">elimina/crea</button>
+      <titulo v-if='show' :text='text'/>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+
+  Vue.component('btnInc', {
+    template: '<div><button v-on:click="incrementaUno">+</button><button v-on:click="incrementaCinco">+5</button></div>',
+    methods: {
+      incrementaUno: function(){
+        this.$emit('incrementa', 1)
+      },
+      incrementaCinco: function(){
+        this.$emit('incrementa', 5)
+      }
+    }    
+  })
+
+  var app = new Vue({
+    el: '#app',
+    template: '<div v-on:incrementa="incrementa"><h1>{{count}}</h1><btnInc v-on:incrementa="incrementa" /></div>',
+    data: function () {
+      return { count: 0 }
+    },
+    methods: {
+      incrementa: function(valor){
+        console.log(valor)
+        this.count += valor
+      }
+    }
+  })
+  </script>
+</body>
+</html>
