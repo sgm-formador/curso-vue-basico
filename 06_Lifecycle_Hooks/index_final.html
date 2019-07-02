@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+      <button v-on:click="changeText">Cambia el texto</button>
+      <button v-on:click="destroy">elimina/crea</button>
+    <titulo v-if='show' :text='text'/>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+  Vue.component('titulo', {
+    props: ['text'],
+    template: '<h1>{{ text }}</h1>',
+    beforeCreate: () => console.log('beforeCreate'),
+    created: () => console.log('created'),
+    beforeMount: () => console.log('beforeMount'),
+    mounted: () => console.log('mounted'),
+    beforeUpdate: () => console.log('beforeUpdate'),
+    updated: () => console.log('updated'),
+    activated: () => console.log('activated'),
+    deactivated: () => console.log('deactivated'),
+    beforeDestroy: () => console.log('beforeDestroy'),
+    destroyed: () => console.log('destroyed')    
+  })
+
+
+
+  var app = new Vue({
+    el: '#app',
+    data: {
+      text: 'Hola',
+      show: true
+    },
+    methods: {
+      changeText: function(){
+        this.text = 'Hola life cycle update Hooks'
+      },
+      destroy: function(){
+        this.show = !this.show
+      }
+    }    
+  })
+  </script>
+</body>
+</html>

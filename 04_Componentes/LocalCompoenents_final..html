@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,10 +23,13 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
-   Vue.component('todo-item', {
+  const todoItem = {
     props: ['todo'],
     template: '<li>{{ todo.text }}</li>'
-    })
+  }
+  const todoTitle = {
+    template: '<h1>Mi titulo</h1>'
+  }
 
 
   var app = new Vue({
@@ -38,21 +42,25 @@
         { text: 'Aprender Vue' },
         { text: 'Dominar el Mundo' }
       ]
+    },
+    components: {
+      'todo-title': todoTitle,
+      'todo-item': todoItem
     }
   })
 
-  var app2 = new Vue({
-    el: '#app2',
-    data: {
-      showList: true,
-      visivility: true,
-      todos: [
-        { text: 'Aprender JavaScript' },
-        { text: 'Aprender Vue' },
-        { text: 'Dominar el Mundo' }
-      ]
-    }
-  })
+  // var app2 = new Vue({
+  //   el: '#app2',
+  //   data: {
+  //     showList: true,
+  //     visivility: true,
+  //     todos: [
+  //       { text: 'Aprender JavaScript' },
+  //       { text: 'Aprender Vue' },
+  //       { text: 'Dominar el Mundo' }
+  //     ]
+  //   }
+  // })
   
   </script>
 </body>

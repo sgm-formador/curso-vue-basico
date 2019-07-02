@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Props And Computed</title>
+</head>
+<body>
+  <div id="app">
+    <my-profile :name='name' :surname='surname' :age='age' />
+  </div>
+  <hr>
+  <div id="app2">
+    <my-profile :name='name' :surname='surname' :age='age' />
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      name: 'Samuel',
+      surname: "Gómez",
+      age: 36
+    },
+    components: {
+      'my-profile': {
+        props: ['name', 'surname', 'age'],
+        // props: {
+        //   name: String,
+        //   surname: String,
+        //   age: Number //podemos pasar un array de typos [Number, String]
+        // },
+        // props: {
+        //   name: {
+        //     type: String,
+        //     required: true
+        //   },
+        //   surname: String,
+        //   age: {
+        //     type: [Number, String],
+        //     default: 18
+        //   }
+        // },
+        template: '<div>Hi, my name is {{name}} {{surname}}, I am {{age}} years old.</div>'
+      }
+    }
+  })
+
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      name: 'Samuel',
+      surname: "Gómez",
+      age: 36
+    },
+    components: {
+      'my-profile': {
+        props: ['name', 'surname', 'age'],
+        template: '<div>Hi, my name is {{completeName}}, I am {{age}} years old.</div>',
+        computed: {
+          completeName: function () {
+            return this.name + ' ' + this.surname
+          }
+        }
+      }
+    }
+  })
+  </script>
+</body>
+</html>
